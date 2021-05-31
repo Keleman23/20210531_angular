@@ -27,7 +27,12 @@ export class AppComponent {
     return false;
   }
 
-  sortedArticles(): Article[] {
-    return this.articles.sort((a:Article, b:Article) =>b.votes - a.votes);
+  sortedArticles(sorting: HTMLInputElement): Article[] {
+    console.log(`sorting ${sorting}`);
+    if (sorting.checked == false){
+      return this.articles.sort((a:Article, b:Article) =>b.votes - a.votes);
+    }else{
+      return this.articles.sort((a:Article, b:Article) =>a.votes - b.votes);
+    }
   }
 }

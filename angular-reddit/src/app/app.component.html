@@ -15,12 +15,14 @@
 
   <div class="field">
     <label for="author">Author</label>
-    <input type="text" name="author" id="link" #newAuthor>
+    <input type="text" name="author" id="author" #newAuthor>
   </div>
 
   <button (click)="addArticle(newtitle, newlink, newAuthor)">Submit</button>
 </form>
 
 <div class="ui grid posts">
-  <app-article *ngFor="let article of sortedArticles()" [article] ="article"></app-article>
+  <label for="sort"> Sort Articles Votes</label><br>
+  <input (click)="sortedArticles(sorting)" type="checkbox" id="sortBox" name="sortBox" #sorting> 
+  <app-article *ngFor="let article of sortedArticles(sorting)" [article] ="article"></app-article>
 </div>
