@@ -12,18 +12,22 @@ export class AppComponent {
 
   constructor(){
     this.articles = [
-      new Article('Google', "www.google.com", 4),
-      new Article('Angular', "www.angular.io", 5),
-      new Article('gitHub', "www.githaub.com", 1),
+      new Article('Google', "www.google.com", "author1", 4),
+      new Article('Angular', "www.angular.io", "author2", 5),
+      new Article('gitHub', "www.githaub.com", "author3", 1),
     ]
   }
 
-  addArticle(title: HTMLInputElement, link: HTMLInputElement): boolean{
-    console.log(`Adding new article, title: ${title.value} link: ${link.value}`);
-    this.articles.push(new Article(title.value, link.value));
+  addArticle(title: HTMLInputElement, link: HTMLInputElement, author: HTMLInputElement): boolean{
+    console.log(`Adding new article, title: ${title.value} link: ${link.value} author: ${author.value}`);
+    this.articles.push(new Article(title.value, link.value, author.value));
 
     title.value = '';
     link.value = '';
     return false;
+  }
+
+  sortedArticles(): Article[] {
+    return this.articles.sort((a:Article, b:Article) =>b.votes - a.votes);
   }
 }

@@ -12,6 +12,14 @@
     <a class="ui large header" href="{{article.link}}">
       {{ article.title }}
     </a>
+
+    <div class="meta"> 
+        <ul class="ui horizontal list">
+            <li class="item">( {{article.domain()}} )</li>
+            <li class="item">( {{article.author}} )</li>
+        </ul>
+
+    </div>
     <ul class="ui big horizontal list voters">
       <li class="item">
         <a href (click)="voteUp()">
