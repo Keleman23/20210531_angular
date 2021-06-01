@@ -1,5 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+
+function skuValidator(control: FormControl):{ [s: string]: boolean}{
+  if(!control.value.match(/^123/)){
+    return {invalidSku:true};
+  }else{
+    return {};
+  }
+  }
 
 @Component({
   selector: 'app-demo-form-with-custom-validation',
@@ -10,7 +18,7 @@ export class DemoFormWithCustomComponent implements OnInit {
   sku: AbstractControl;
   constructor(fb: FormBuilder) {
     this.myForm = fb.group({
-      'sku': ['', Validators.required]
+      'sku': ['', Validators.compose([Validators.required, skuValidator])]
     });
 
     this.sku = this.myForm.controls['sku'];
