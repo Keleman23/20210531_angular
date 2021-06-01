@@ -4,35 +4,59 @@ import { Article } from './article/article.model';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
   title = 'angular-reddit';
   articles: Article[];
+  ascendingSort: boolean;
 
-  constructor(){
+  constructor() {
+    this.ascendingSort = false;
     this.articles = [
-      new Article('Google', "www.google.com", "author1", 4),
-      new Article('Angular', "www.angular.io", "author2", 5),
-      new Article('gitHub', "www.githaub.com", "author3", 1),
-    ]
+      new Article(
+        'Angular Hello World',
+        'https://www.simplilearn.com/tutorials/angular-tutorial/angular-hello-world',
+        'Chinmayee Deshpande',
+        4
+      ),
+      new Article(
+        'Good Parts of JavaScript',
+        'https://levelup.gitconnected.com/good-parts-of-javascript-coding-best-practices-8328a8cac7fd',
+        'John Au-Yeung',
+        2
+      ),
+    ];
   }
 
-  addArticle(title: HTMLInputElement, link: HTMLInputElement, author: HTMLInputElement): boolean{
-    console.log(`Adding new article, title: ${title.value} link: ${link.value} author: ${author.value}`);
+  addArticle(
+    title: HTMLInputElement,
+    link: HTMLInputElement,
+    author: HTMLInputElement
+  ): boolean {
+    console.log(
+      `Adding new article, title: ${title.value}, link: ${link.value}`
+    );
     this.articles.push(new Article(title.value, link.value, author.value));
 
     title.value = '';
     link.value = '';
+    author.value = '';
     return false;
   }
 
-  sortedArticles(sorting: HTMLInputElement): Article[] {
-    console.log(`sorting ${sorting}`);
-    if (sorting.checked == false){
-      return this.articles.sort((a:Article, b:Article) =>b.votes - a.votes);
-    }else{
-      return this.articles.sort((a:Article, b:Article) =>a.votes - b.votes);
-    }
+  sortedArticles(): Article[] {
+    return this.ascendingSort
+      ? this.articles.sort((a: Article, b: Article) => a.votes - b.votes)
+      : this.articles.sort((a: Article, b: Article) => b.votes - a.votes);
+  }
+
+  toggleSort() {
+    this.ascendingSort = !this.ascendingSort;
+    return false;
+  }
+
+  deleteArticleFromArray(articleTitle: string): void {
+    this.articles = this.articles.filter(article => article.title !== articleTitle);
   }
 }

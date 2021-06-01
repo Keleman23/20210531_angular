@@ -4,25 +4,30 @@
   <h3 class="ui header">Add a Link</h3>
 
   <div class="field">
-    <label for="title">Title</label>
+    <label for="title">Title:</label>
     <input type="text" name="title" id="title" #newtitle>
   </div>
 
   <div class="field">
-    <label for="link">Link</label>
+    <label for="link">Link:</label>
     <input type="text" name="link" id="link" #newlink>
   </div>
 
   <div class="field">
-    <label for="author">Author</label>
-    <input type="text" name="author" id="author" #newAuthor>
+    <label for="author">Author:</label>
+    <input type="text" name="author" id="author" #newauthor>
   </div>
 
-  <button (click)="addArticle(newtitle, newlink, newAuthor)">Submit</button>
+  <button class="ui positive button" (click)="addArticle(newtitle, newlink, newauthor)">Submit</button>
+
 </form>
 
+<a href (click)="toggleSort()">
+  <i class="sort icon">Sorting</i>
+</a>
+
 <div class="ui grid posts">
-  <label for="sort"> Sort Articles Votes</label><br>
-  <input (click)="sortedArticles(sorting)" type="checkbox" id="sortBox" name="sortBox" #sorting> 
-  <app-article *ngFor="let article of sortedArticles(sorting)" [article] ="article"></app-article>
+  <app-article *ngFor="let article of sortedArticles(); let i=index"
+  [article]="article" [index]="i + 1" (onDelete)="deleteArticleFromArray($event)">
+  </app-article>
 </div>
