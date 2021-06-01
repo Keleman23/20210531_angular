@@ -25,8 +25,10 @@
 <div *ngIf="articles.length > 2" class="ui message">There are more than 2 articles in the list!</div>
 
 <div [ngSwitch]="articles.length" class="ui message warning">
-  <div *ngSwitchCase="1">There is 1 article</div>
-  <div *ngSwitchCase="2">There are 2 article</div>
+  <div *ngSwitchCase="1">There is <span style="color: red;">1</span> article</div>
+  <div *ngSwitchCase="2">There are <span [style.color]="'blue'">2</span> article</div>
+  <div *ngSwitchCase="3">There are <span [style.font-size.px]="'50'">3</span> article</div>
+  <div *ngSwitchCase="4">There are <span [ngStyle]="{color: 'blue', 'font-size':24+'px'}">4</span> article</div>
   <div *ngSwitchDefault>Other</div>
 </div>
 
