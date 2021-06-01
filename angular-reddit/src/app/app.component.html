@@ -24,6 +24,12 @@
 
 <div *ngIf="articles.length > 2" class="ui message">There are more than 2 articles in the list!</div>
 
+<div [ngSwitch]="articles.length" class="ui message warning">
+  <div *ngSwitchCase="1">There is 1 article</div>
+  <div *ngSwitchCase="2">There are 2 article</div>
+  <div *ngSwitchDefault>Other</div>
+</div>
+
 <a href (click)="toggleSort()">
   <i class="sort icon">Sorting</i>
 </a>
